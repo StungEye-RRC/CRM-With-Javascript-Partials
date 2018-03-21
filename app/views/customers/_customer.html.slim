@@ -1,0 +1,19 @@
+.card
+  .card-block
+    h4.card-title
+      = customer.name
+  - if customer.image.present?
+    = image_tag customer.image, class: 'card-img-top img-fluid mx-auto d-block'
+  .card-block
+    p.card-text
+      strong Province:
+      - if customer.province.present?
+        = customer.province.name
+      - else
+        | Unknown
+    p.card-text
+      = customer.phone
+    p
+      = customer.email
+    p
+      = link_to 'permalink', customer
