@@ -17,3 +17,8 @@
       = customer.email
     p
       = link_to 'permalink', customer
+    p
+      - if session[:to_call_list].include?(customer.id)
+        = link_to 'Mark as Called', mark_as_called_customer_path(customer), method: :post
+      - else
+        = link_to 'Remember To Call', add_to_call_list_customer_path(customer), method: :post

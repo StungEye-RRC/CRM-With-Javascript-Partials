@@ -1,0 +1,26 @@
+doctype html
+html
+  head
+    meta content=("text/html; charset=UTF-8") http-equiv="Content-Type" /
+    title SlimCrm
+    = csrf_meta_tags
+    = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
+    = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
+  body
+    .container
+      ul
+        li= link_to 'Home', root_path
+        li= link_to 'Missing Email', missing_email_customers_path
+      p
+        | You have visited the page #{pluralize session[:visit_count], 'time'}.
+
+      h2 Customer To Call
+      - if @customers_to_call.empty?
+        p There are no customers to call
+      - else
+        .card-deck-wrapper
+          .card-deck
+            = render @customers_to_call
+
+      p = link_to 'Clear Call List', clear_call_list_customers_path, method: :post
+      = yield

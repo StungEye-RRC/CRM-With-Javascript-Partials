@@ -1,7 +1,13 @@
 Rails.application.routes.draw do
   resources :customers, only: [:index, :show] do
     collection do
-      get :missing_email
+      get :missing_email # GET /customers/missing_email
+      post :clear_call_list
+    end
+
+    member do
+      post :add_to_call_list # POST /customers/:id/add_to_call_list
+      post :mark_as_called   # POST /customers/:id/mark_as_called
     end
   end
 
