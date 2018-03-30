@@ -1,0 +1,23 @@
+var to_call = document.querySelector("#to_call")
+var empty_list = document.querySelector("#empty_list")
+var clear_list = document.querySelector("#clear_list")
+var alerts = document.querySelector("#alerts")
+
+<% if @success_alert %>
+  alerts.innerHTML = "<%= j render 'shared/success_alert' %>"
+<% end %>
+
+
+<% if @error_alert %>
+  alerts.innerHTML = "<%= j render 'shared/error_alert' %>"
+<% end %>
+
+<% if @customers_to_call.empty? %>
+  empty_list.classList.remove("d-none")
+  clear_list.classList.add("d-none")
+<% else %>
+  empty_list.classList.add("d-none")
+  clear_list.classList.remove("d-none")
+<% end %>
+
+to_call.innerHTML = "<%= j render partial: 'customers/tiny_customer', collection: @customers_to_call %>"

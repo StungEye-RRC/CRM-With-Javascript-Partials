@@ -1,7 +1,7 @@
 class CustomersController < ApplicationController
   before_action :initialize_session
   before_action :increment_visit_count, except: [:show]
-  before_action :load_customers_to_call
+  before_action :load_customers_to_call, except: [:add_to_call_list, :mark_as_called, :clear_call_list]
 
   def index
     @customers = Customer.all
@@ -19,21 +19,31 @@ class CustomersController < ApplicationController
   def add_to_call_list
     id = params[:id].to_i
 
-    unless session[:to_call_list].include?(id)
+    if session[:to_call_list].include?(id)
+      @error_alert = "This customer is already in your to call list."
+    else
       session[:to_call_list] << id
-      redirect_to customers_path
+      @success_alert = "You successfully added the customer to your call list."
     end
+
+    load_customers_to_call
   end
+  # Automatically load the view: add_to_call_list.js.erb
 
   def mark_as_called
     id = params[:id].to_i
     session[:to_call_list].delete(id)
-    redirect_to customers_path
+
+    @success_alert = "Good work. You called a customer!"
+    load_customers_to_call
+    render :add_to_call_list # Run the add_to_call_list.js.erb
   end
 
   def clear_call_list
-    session[:to_call_list] = nil
-    redirect_to customers_path
+    session[:to_call_list] = []
+
+    load_customers_to_call
+    render :add_to_call_list # Run the add_to_call_list.js.erb
   end
 
   private

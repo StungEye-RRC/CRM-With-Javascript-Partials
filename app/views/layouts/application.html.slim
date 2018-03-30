@@ -8,6 +8,7 @@ html
     = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
   body
     .container
+      #alerts
       ul
         li= link_to 'Home', root_path
         li= link_to 'Missing Email', missing_email_customers_path
@@ -16,11 +17,14 @@ html
 
       h2 Customer To Call
       - if @customers_to_call.empty?
-        p There are no customers to call
+        #to_call.card-deck
+        p#empty_list There are no customers to call.
+        p#clear_list.d-none = link_to 'Clear Call List', clear_call_list_customers_path, remote: true, method: :post
       - else
-        .card-deck-wrapper
-          .card-deck
-            = render @customers_to_call
+        #to_call.card-deck
+          = render partial: 'customers/tiny_customer', collection: @customers_to_call
+        p#clear_list = link_to 'Clear Call List', clear_call_list_customers_path, remote: true, method: :post
+        p#empty_list.d-none There are no customers to call.
 
-      p = link_to 'Clear Call List', clear_call_list_customers_path, method: :post
+
       = yield

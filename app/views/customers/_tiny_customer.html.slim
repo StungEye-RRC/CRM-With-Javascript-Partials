@@ -1,0 +1,17 @@
+.card
+  .card-block
+    h4.card-title
+      = tiny_customer.name
+  .card-block
+    p.card-text
+      strong Province:
+      - if tiny_customer.province.present?
+        =< tiny_customer.province.name
+      - else
+        | Unknown
+    p.card-text
+      = tiny_customer.phone
+    p
+      = tiny_customer.email
+    p
+      = link_to 'Mark as Called', mark_as_called_customer_path(tiny_customer), remote: true, method: :post
