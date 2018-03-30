@@ -1,24 +1,5 @@
-# README
+# CRM With Javascript Rendered Partials
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Using unobstructive Javascript in Rails to make AJAX calls and to update only portions of a page using Javascript partial rendering.
 
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+Associated Screencast: https://youtu.be/oeZBcua_dAw
